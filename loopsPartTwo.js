@@ -24,9 +24,10 @@
 */
 
 function addExerciseToRoutineForLoop(routine, exercise, numRepetitions) {
-    // Your Code Here!  Use a For loop, not a for-of loop.
+    for (let index = 0; index < numRepetitions; index++) {
+        routine.push(exercise);
+    }
 }
-
 /* 
    -------TESTS---------------------------------------------------------------
    Run these commands to make sure you did it right. They should all be true.
@@ -63,7 +64,14 @@ console.log(compareArray(routineOne, ["situp", "situp", "situp", "situp", "pushu
 function findMinimumAndMaximum(schedule) {
     let min = Number.POSITIVE_INFINITY;
     let max = 0;
-    // Your Code Here!
+    for (let numOfReps of schedule) {
+        if (max < numOfReps) {
+            max = numOfReps
+        }
+        if (min > numOfReps) {
+            min = numOfReps
+        }
+    }
     return [min, max];
 }
 
@@ -133,6 +141,18 @@ console.log(result[0] == 0 && result[1] == 10);
 
 function convertRoutineFromNewFormat(routineString) {
     let routine = [];
+    let routineArray = routineString.split('|')
+    for (let exerciseString of routineArray) {
+        let exercise = exerciseString.split(':')
+        console.log(exercise)
+        let numOfReps = Number(exercise[0]);
+        let nameOfexercise = exercise[1];
+        let index = 0;
+        while (index < numOfReps) {
+            routine.push(nameOfexercise)
+            index++
+        }
+    }
     // Your Code Here!
     return routine;
 }
@@ -201,9 +221,29 @@ console.log(compareArray(routineThree, [
 */
 
 function calculateRoutineDifficulty(routine) {
-    let difficulty = "";
-    // Your Code Here!
-    return difficulty;
+    let difficulty = 0;
+    for (let i = 0; i < routine.length; i++) {
+        let exercise = routine[i]
+        if (exercise === "situp") {
+            difficulty += 1
+        } else if (exercise === "legraise") {
+            difficulty += 2
+        } else if (exercise === "pushup") {
+            difficulty += 4
+        } else if (exercise === "pullup") {
+            difficulty += 10
+        }
+    } 
+        if (difficulty < 30) {
+           return "Easy"
+        } else if (difficulty >= 30 && difficulty <= 60) {
+            return "Hard"
+        } else {
+           return "Insane"
+        }
+
+   
+   
 }
 
 /* 
